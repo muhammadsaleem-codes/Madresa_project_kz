@@ -1,619 +1,1405 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home — [Institute Name]</title>
-<style>
-/* ============================================================
-   Jamia Website — Design Tokens
-   Palette: ink teal (primary), ivory (bg), brass (accent, sparing), sage (secondary)
-   Type: Fraunces (English display) / Noto Naskh Arabic (Urdu-Arabic) / Inter (UI/body)
-   Signature: hairline geometric arch motif (mihrab silhouette), used as a structural
-   device on hero, section dividers and card corners — never as background wallpaper.
-   ============================================================ */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamia Madinatul Ilm - Islamic Educational Institution</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
-
-:root{
-  --ink: #12312E;          /* primary deep teal-ink */
-  --ink-2: #1B4640;        /* lighter ink for hovers */
-  --ivory: #FAF6EC;        /* page background */
-  --ivory-2: #F2ECDD;      /* card / alt-section background */
-  --paper: #FFFDF8;        /* card surface */
-  --brass: #A9803F;        /* accent — used sparingly */
-  --brass-soft: #C7A467;
-  --sage: #6E8B72;         /* secondary accent */
-  --ink-text: #23281F;     /* body copy */
-  --muted: #6B6A5F;        /* secondary copy */
-  --line: #DED4BC;         /* hairline rule color */
-  --shadow: 0 8px 24px -12px rgba(18,49,46,0.18);
-  --radius: 2px;
-  --maxw: 1180px;
-}
-
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  margin:0;
-  background:var(--ivory);
-  color:var(--ink-text);
-  font-family:'Inter',sans-serif;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-h1,h2,h3,h4{
-  font-family:'Fraunces',serif;
-  font-weight:500;
-  color:var(--ink);
-  margin:0 0 .5em;
-  letter-spacing:-0.01em;
-}
-h1{font-size:clamp(2.2rem,4vw,3.6rem); font-weight:400; line-height:1.08;}
-h2{font-size:clamp(1.6rem,2.6vw,2.3rem); line-height:1.15;}
-h3{font-size:1.25rem;}
-p{margin:0 0 1em; color:var(--ink-text);}
-a{color:inherit; text-decoration:none;}
-img,.ph{display:block; max-width:100%;}
-.container{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
-.eyebrow{
-  font-family:'Inter',sans-serif; font-size:.72rem; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--brass); font-weight:600; margin-bottom:.6em; display:block;
-}
-
-/* Arabic/Urdu text helper */
-[lang="ur"], [lang="ar"], .rtl-text{ font-family:'Noto Naskh Arabic', serif; direction:rtl; }
-
-/* ---------------- Header ---------------- */
-.site-header{
-  position:sticky; top:0; z-index:50;
-  background:rgba(250,246,236,0.94);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line);
-}
-.nav-wrap{
-  max-width:var(--maxw); margin:0 auto; padding:0 28px;
-  display:flex; align-items:center; justify-content:space-between; height:78px;
-}
-.brand{display:flex; align-items:center; gap:12px;}
-.brand-mark{
-  width:42px; height:42px; border:1.5px solid var(--brass); border-radius:50%;
-  display:flex; align-items:center; justify-content:center; color:var(--brass);
-  font-family:'Fraunces',serif; font-size:1.1rem;
-}
-.brand-text{line-height:1.15;}
-.brand-text .en{font-family:'Fraunces',serif; font-size:1.05rem; color:var(--ink); display:block;}
-.brand-text .ur{font-family:'Noto Naskh Arabic',serif; direction:rtl; font-size:.95rem; color:var(--brass); display:block;}
-
-.nav-links{display:flex; gap:30px; align-items:center;}
-.nav-links a{font-size:.92rem; color:var(--ink-text); position:relative; padding:6px 0;}
-.nav-links a:hover{color:var(--brass);}
-.nav-links a.active{color:var(--ink); font-weight:600;}
-.nav-links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--brass);}
-
-.nav-actions{display:flex; align-items:center; gap:14px;}
-.lang-switch{
-  display:flex; border:1px solid var(--line); border-radius:20px; overflow:hidden; font-size:.72rem;
-}
-.lang-switch button{
-  background:none; border:none; padding:6px 12px; cursor:pointer; color:var(--muted); font-family:'Inter',sans-serif;
-}
-.lang-switch button.active{background:var(--ink); color:var(--ivory);}
-.btn{
-  display:inline-block; padding:11px 22px; border-radius:2px; font-size:.86rem; font-weight:600;
-  border:1px solid var(--ink); cursor:pointer; transition:all .18s ease; text-align:center;
-}
-.btn-primary{background:var(--ink); color:var(--ivory);}
-.btn-primary:hover{background:var(--ink-2);}
-.btn-outline{background:transparent; color:var(--ink); border-color:var(--ink);}
-.btn-outline:hover{background:var(--ink); color:var(--ivory);}
-.btn-brass{background:var(--brass); color:var(--ivory); border-color:var(--brass);}
-.btn-brass:hover{background:#8f6c33;}
-.menu-toggle{display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--ink);}
-
-/* ---------------- Hero (arch motif) ---------------- */
-.hero{padding:64px 0 40px; overflow:hidden;}
-.hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;}
-.hero-copy .eyebrow{margin-bottom:14px;}
-.hero-copy h1{margin-bottom:18px;}
-.hero-copy .tagline{font-size:1.05rem; color:var(--muted); margin-bottom:26px; max-width:46ch;}
-.hero-ctas{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:34px;}
-.hero-stats-inline{display:flex; gap:28px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:20px;}
-.hero-stats-inline div{display:flex; flex-direction:column;}
-.hero-stats-inline strong{font-family:'Fraunces',serif; font-size:1.5rem; color:var(--ink);}
-.hero-stats-inline span{font-size:.76rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em;}
-
-/* arch frame for hero image placeholder */
-.arch-frame{
-  position:relative; border-radius:220px 220px 8px 8px; overflow:hidden;
-  border:1.5px solid var(--brass-soft); box-shadow:var(--shadow);
-  aspect-ratio:3/4; background:var(--ivory-2);
-}
-.arch-frame::before{
-  content:""; position:absolute; inset:10px; border-radius:200px 200px 4px 4px;
-  border:1px solid rgba(169,128,63,.35); pointer-events:none;
-}
-
-/* ---------------- Placeholder tiles ---------------- */
-.ph{
-  background:
-    repeating-linear-gradient(135deg, rgba(18,49,46,0.05) 0 2px, transparent 2px 14px),
-    var(--ivory-2);
-  border:1px dashed var(--line);
-  color:var(--muted);
-  position:relative; overflow:hidden;
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
-  text-align:center; gap:4px; padding:10px; min-height:160px;
-  width:100%; height:100%;
-  font-family:'Inter',sans-serif;
-}
-.ph img{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; object-position:center; display:block; z-index:0;
-  /* empty src="" renders nothing visible, so the dashed placeholder background above shows through */
-}
-.ph .ph-label{
-  position:relative; z-index:1;
-  font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; font-weight:600;
-  background:rgba(18,49,46,0.62); color:var(--ivory); padding:3px 10px; border-radius:2px;
-}
-.ph .ph-sub{
-  position:relative; z-index:1; font-size:.68rem; color:var(--ivory);
-  background:rgba(18,49,46,0.5); padding:2px 8px; border-radius:2px;
-}
-.ph.square{aspect-ratio:1/1;}
-.ph.wide{aspect-ratio:16/9;}
-.ph.portrait{aspect-ratio:3/4;}
-.ph.round{border-radius:50%; aspect-ratio:1/1;}
-
-/* ---------------- Sections ---------------- */
-section{padding:76px 0;}
-.section-head{max-width:640px; margin:0 auto 44px;}
-.section-head.center{text-align:center; margin-left:auto; margin-right:auto;}
-.alt{background:var(--ivory-2);}
-.divider{
-  width:100%; height:1px; background:var(--line); margin:0; position:relative;
-}
-.divider::after{
-  content:"◆"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  background:var(--ivory); color:var(--brass); font-size:.6rem; padding:0 14px;
-}
-
-/* ---------------- Cards / Grids ---------------- */
-.grid{display:grid; gap:28px;}
-.grid-2{grid-template-columns:repeat(2,1fr);}
-.grid-3{grid-template-columns:repeat(3,1fr);}
-.grid-4{grid-template-columns:repeat(4,1fr);}
-.card{
-  background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-  padding:26px; transition:box-shadow .2s ease, transform .2s ease;
-}
-.card:hover{box-shadow:var(--shadow); transform:translateY(-2px);}
-.card h3{margin-bottom:8px;}
-.card p{color:var(--muted); font-size:.92rem; margin-bottom:0;}
-.pill{
-  display:inline-block; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase;
-  color:var(--sage); border:1px solid var(--sage); border-radius:20px; padding:3px 10px; margin-bottom:10px;
-}
-
-/* teacher/person card */
-.person-card{background:var(--paper); border:1px solid var(--line); text-align:center; padding:0 0 22px;}
-.person-card .ph{border-radius:0; margin-bottom:16px;}
-.person-card h3{margin-bottom:2px; font-size:1.05rem;}
-.person-card .role{font-size:.8rem; color:var(--brass); font-weight:600; margin-bottom:8px; display:block;}
-.person-card .meta{font-size:.8rem; color:var(--muted); padding:0 18px;}
-
-/* stats strip */
-.stats-strip{background:var(--ink); color:var(--ivory); padding:46px 0;}
-.stats-strip .grid{grid-template-columns:repeat(6,1fr); text-align:center; gap:10px;}
-.stats-strip strong{display:block; font-family:'Fraunces',serif; font-size:2rem; color:var(--brass-soft);}
-.stats-strip span{font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; color:#D8D3C2;}
-
-/* timeline */
-.timeline{border-left:1.5px solid var(--brass-soft); margin-left:8px; padding-left:30px;}
-.timeline .t-item{position:relative; padding-bottom:34px;}
-.timeline .t-item::before{
-  content:""; position:absolute; left:-36px; top:4px; width:11px; height:11px; border-radius:50%;
-  background:var(--ivory); border:2px solid var(--brass);
-}
-.timeline .t-year{font-family:'Fraunces',serif; color:var(--brass); font-size:1rem; margin-bottom:4px; display:block;}
-
-/* forms */
-.form-panel{background:var(--paper); border:1px solid var(--line); padding:34px; border-radius:var(--radius);}
-.form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
-.field{display:flex; flex-direction:column; gap:6px;}
-.field.full{grid-column:1/-1;}
-.field label{font-size:.8rem; font-weight:600; color:var(--ink);}
-.field input, .field select, .field textarea{
-  border:1px solid var(--line); background:var(--ivory); padding:11px 12px; font-family:'Inter',sans-serif;
-  font-size:.92rem; border-radius:2px; color:var(--ink-text);
-}
-.field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--brass-soft); outline-offset:1px;}
-.disclaimer{font-size:.8rem; color:var(--muted); border-left:2px solid var(--brass); padding-left:14px; margin-top:18px;}
-
-/* notice banner */
-.notice{
-  background:var(--ivory-2); border:1px dashed var(--brass-soft); padding:14px 18px; font-size:.85rem;
-  color:var(--ink); margin-bottom:34px; display:flex; gap:10px; align-items:flex-start;
-}
-
-/* footer */
-footer{background:var(--ink); color:#D8D3C2; padding:60px 0 26px; margin-top:0;}
-footer h4{color:var(--ivory); font-size:.95rem; margin-bottom:14px; font-family:'Fraunces',serif;}
-footer a{color:#C9C4AF; font-size:.87rem; display:block; margin-bottom:8px;}
-footer a:hover{color:var(--brass-soft);}
-.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:36px;}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.12); margin-top:40px; padding-top:20px; font-size:.78rem; color:#9B9682; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
-
-/* breadcrumb / page header */
-.page-hero{padding:52px 0 40px; border-bottom:1px solid var(--line); background:var(--ivory-2);}
-.page-hero .eyebrow{margin-bottom:10px;}
-.page-hero p{max-width:60ch; color:var(--muted);}
-
-/* tabs */
-.tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; border-bottom:1px solid var(--line);}
-.tabs button{
-  background:none; border:none; padding:10px 4px; margin-right:22px; font-family:'Inter',sans-serif;
-  font-size:.9rem; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent;
-}
-.tabs button.active{color:var(--ink); border-bottom-color:var(--brass); font-weight:600;}
-
-/* responsive */
-@media (max-width:960px){
-  .hero-grid{grid-template-columns:1fr;}
-  .grid-2, .grid-3, .grid-4{grid-template-columns:repeat(2,1fr);}
-  .stats-strip .grid{grid-template-columns:repeat(3,1fr); row-gap:24px;}
-  .footer-grid{grid-template-columns:1fr 1fr;}
-}
-@media (max-width:680px){
-  .nav-links{
-    position:fixed; inset:78px 0 0 0; background:var(--ivory); flex-direction:column;
-    padding:30px 28px; gap:22px; transform:translateX(100%); transition:transform .25s ease; overflow-y:auto;
-  }
-  .nav-links.open{transform:translateX(0);}
-  .menu-toggle{display:block;}
-  .nav-actions .btn-outline{display:none;}
-  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
-  .stats-strip .grid{grid-template-columns:repeat(2,1fr);}
-  .hero{padding:38px 0 24px;}
-  .form-row{grid-template-columns:1fr;}
-  .footer-grid{grid-template-columns:1fr;}
-}
-
-/* RTL demo mode (toggled via JS on <html dir>) */
-html[dir="rtl"] body{font-family:'Noto Naskh Arabic', serif;}
-html[dir="rtl"] .timeline{border-left:none; border-right:1.5px solid var(--brass-soft); margin-left:0; margin-right:8px; padding-left:0; padding-right:30px;}
-html[dir="rtl"] .timeline .t-item::before{left:auto; right:-36px;}
-html[dir="rtl"] .disclaimer{border-left:none; border-right:2px solid var(--brass); padding-left:0; padding-right:14px;}
-
-</style>
-
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            850: '#064229',
+                            900: '#043823',
+                            950: '#022115',
+                        },
+                        gold: {
+                            400: '#f1c40f',
+                            500: '#d4af37',
+                            600: '#b8860b',
+                            700: '#8b6508'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fafaf9;
+        }
+        .font-arabic {
+            font-family: 'Amiri', serif;
+        }
+        .islamic-pattern {
+            background-color: #064e3b;
+            background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#d4af37 0.75px, #064e3b 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+        .islamic-bg-light {
+            background-color: #f8f6f0;
+            background-image: radial-gradient(#d4af37 0.4px, transparent 0.4px);
+            background-size: 24px 24px;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #047857;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #064e3b;
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-marksheet, #printable-marksheet * {
+                visibility: visible;
+            }
+            #printable-marksheet {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="text-slate-800 antialiased selection:bg-gold-500 selection:text-white">
 
-<header class="site-header">
-  <div class="nav-wrap">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">IN</span>
-      <span class="brand-text">
-        <span class="en">Idaratul Sinan Khuzdar Balochistan</span>
-        <span class="ur">المدرسة الإسلامية جامعة سنان بن سلمہ</span>
-      </span>
-    </a>
-    <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-<a href="about.html" class="">About</a>
-<a href="programs.html" class="">Programs</a>
-<a href="teachers.html" class="">Teachers</a>
-<a href="darul-ifta.html" class="">Dar-ul-Ifta</a>
-<a href="library.html" class="">Library</a>
-<a href="gallery.html" class="">Gallery</a>
-<a href="achievements.html" class="">Achievements</a>
-<a href="admissions.html" class="">Admissions</a>
-<a href="contact.html" class="">Contact</a>
+    <!-- Top Information Bar -->
+    <div class="bg-emerald-950 text-emerald-100 text-xs py-2.5 px-4 border-b border-gold-500/30">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4 flex-wrap justify-center md:justify-start">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-phone text-gold-400"></i> +92 (21) 3456-7890</span>
+                <span class="hidden md:inline text-gold-500/40">|</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-gold-400"></i> info@madinatulum.edu</span>
+                <span class="hidden md:inline text-gold-500/40">|</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-gold-400"></i> Main Education Complex, Karachi, Pakistan</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="bg-gold-500/20 text-gold-300 px-2.5 py-0.5 rounded-full border border-gold-500/30 font-medium">
+                    <i class="fa-solid fa-circle-check text-green-400 text-[10px] mr-1"></i> Admissions 2026-27 Open
+                </span>
+                <button onclick="openPortalModal()" class="text-emerald-200 hover:text-gold-400 font-semibold flex items-center gap-1 transition-colors">
+                    <i class="fa-solid fa-lock text-xs"></i> Portal Login
+                </button>
+            </div>
+        </div>
+    </div>
 
-      <a href="admissions.html" class="btn btn-brass" style="display:inline-block;">Apply for Admission</a>
+    <!-- Main Navigation Bar -->
+    <nav class="sticky top-0 z-40 bg-emerald-900/95 backdrop-blur-md text-white shadow-xl border-b-2 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-12 h-12 rounded-full bg-emerald-950 border-2 border-gold-500 flex items-center justify-center text-gold-400 shadow-inner">
+                        <i class="fa-solid fa-mosque text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                            Jamia Madinatul Ilm
+                        </h1>
+                        <p class="text-[10px] text-gold-400 font-arabic tracking-wider">جامعة مدينة العلم الإسلامية</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden lg:flex items-center space-x-1 font-medium text-sm">
+                    <a href="#home" class="px-3 py-2 rounded-md hover:bg-emerald-800 hover:text-gold-400 transition-all">Home</a>
+                    <a href="#about" class="px-3 py-2 rounded-md hover:bg-emerald-800 hover:text-gold-400 transition-all">About Us</a>
+                    <a href="#leadership" class="px-3 py-2 rounded-md hover:bg-emerald-800 hover:text-gold-400 transition-all">Leadership</a>
+                    <a href="#departments" class="px-3 py-2 rounded-md hover:bg-emerald-800 hover:text-gold-400 transition-all">Courses</a>
+                    <a href="#gallery" class="px-3 py-2 rounded-md hover:bg-emerald-800 hover:text-gold-400 transition-all">Gallery</a>
+                    <a href="#results" class="px-3 py-2 rounded-md hover:bg-emerald-800 hover:text-gold-400 transition-all">Results</a>
+                    <a href="#fatwa" class="px-3 py-2 rounded-md hover:bg-emerald-800 hover:text-gold-400 transition-all">Darul Ifta</a>
+                    <a href="#donations" class="px-3 py-2 rounded-md text-gold-400 font-semibold hover:bg-emerald-800 transition-all">Donate</a>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <button onclick="openAdmissionModal()" class="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-emerald-950 font-bold px-5 py-2.5 rounded-lg shadow-lg hover:shadow-gold-500/20 transition-all transform hover:-translate-y-0.5 text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-graduation-cap mr-1.5"></i> Apply Online
+                    </button>
+                </div>
+
+                <!-- Mobile menu toggle -->
+                <div class="flex lg:hidden">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" type="button" class="text-gold-400 hover:text-white p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-emerald-950 border-t border-emerald-800 px-4 pt-2 pb-6 space-y-2 text-sm">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-gold-400 font-semibold">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-white hover:text-gold-400">About Us</a>
+            <a href="#leadership" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-white hover:text-gold-400">Leadership & Scholars</a>
+            <a href="#departments" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-white hover:text-gold-400">Courses</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-white hover:text-gold-400">Photo Gallery</a>
+            <a href="#results" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-white hover:text-gold-400">Result Checker</a>
+            <a href="#fatwa" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-white hover:text-gold-400">Darul Ifta</a>
+            <a href="#prayers" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-white hover:text-gold-400">Prayer Times</a>
+            <a href="#donations" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-gold-400">Donate Now</a>
+            <div class="pt-2">
+                <button onclick="openAdmissionModal(); toggleMobileMenu();" class="w-full bg-gold-500 hover:bg-gold-600 text-emerald-950 font-bold py-2.5 rounded-lg text-center shadow-md">
+                    <i class="fa-solid fa-graduation-cap mr-1"></i> Apply Online
+                </button>
+            </div>
+        </div>
     </nav>
-    <div class="nav-actions">
-      <div class="lang-switch">
-        <button data-lang="en" class="active">EN</button>
-        <button data-lang="ur">اردو</button>
-        <button data-lang="ar">عربي</button>
-      </div>
-      <a href="admissions.html" class="btn btn-outline">Apply</a>
-      <button class="menu-toggle" aria-label="Menu">☰</button>
-    </div>
-  </div>
-</header>
 
+    <!-- Hero Banner Section -->
+    <section id="home" class="relative islamic-pattern text-white min-h-[600px] flex items-center overflow-hidden border-b-4 border-gold-500">
+        <div class="absolute inset-0 bg-emerald-950/75"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center z-10">
+            <!-- Verse Header -->
+            <div class="inline-block bg-emerald-900/80 border border-gold-500/40 rounded-full px-6 py-2 mb-6 backdrop-blur-sm shadow-xl">
+                <p class="font-arabic text-gold-300 text-lg sm:text-2xl tracking-wide">
+                    ﷽ &nbsp;•&nbsp; اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ
+                </p>
+            </div>
 
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow">Islamic Education • Balochistan, Pakistan</span>
-      <h1>Idaratul Sinan Khuzdar Balochistan</h1>
-      <p class="tagline">[Replace with official tagline / motto] — a residential seat of Islamic learning taking students
-      from Nazirah Qur'an through Basic Islamic Studies to the complete Aalim Course,
-      with its own Dar-ul-Ifta and library.</p>
-      <div class="hero-ctas">
-        <a href="admissions.html" class="btn btn-primary">Apply for Admission</a>
-        <a href="darul-ifta.html" class="btn btn-outline">Dar-ul-Ifta</a>
-        <a href="library.html" class="btn btn-outline">Explore Library</a>
-      </div>
-      <div class="hero-stats-inline">
-        <div><strong>14</strong><span>Teachers &amp; Staff</span></div>
-        <div><strong>200</strong><span>Residential Students</span></div>
-        <div><strong>40+</strong><span>Graduated Ulama</span></div>
-        <div><strong>1</strong><span>Dar-ul-Ifta</span></div>
-      </div>
-    </div>
-    <div class="arch-frame">
-      <div class="ph ">
-  <!-- Institute Building Photo — paste your image path/URL inside src="" below -->
-  <img src="./madresalogo.jpg" alt="">
-  <span class="ph-label">Institute Building Photo</span>
-  <span class="ph-sub">Front elevation — replace with original photograph</span>
-</div>
-    </div>
-  </div>
-</section>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight max-w-4xl mx-auto">
+                Preserving Sacred Islamic Knowledge with Character & Academic Excellence
+            </h1>
 
-<section class="stats-strip">
-  <div class="container">
-    <div class="grid">
-      <div><strong>14</strong><span>Teachers</span></div>
-      <div><strong>200</strong><span>Residential Students</span></div>
-      <div><strong>40+</strong><span>Graduated Ulama</span></div>
-      <div><strong>Aalim</strong><span>Complete Course</span></div>
-      <div><strong>Ifta</strong><span>Dar-ul-Ifta</span></div>
-      <div><strong>Library</strong><span>Islamic Books</span></div>
-    </div>
-  </div>
-</section>
+            <p class="max-w-3xl mx-auto text-base sm:text-xl text-emerald-100 font-light leading-relaxed mb-10">
+                Jamia Madinatul Ilm is a premier institute dedicated to Hifz-ul-Quran, Classical Dars-e-Nizami, Specialized Jurisprudence, and Modern Education under the guidance of renowned Islamic scholars.
+            </p>
 
-<section>
-  <div class="container">
-    <div class="section-head center">
-      <span class="eyebrow">Welcome</span>
-      <h2>An institute built on knowledge, character and service</h2>
-      <p style="color:var(--muted);">[Replace with an official 3–5 sentence introduction covering the institute's
-      founding purpose, its residential character, and its place within the local community of Balochistan.
-      Avoid stating a founding year or historical claim until confirmed.]</p>
-    </div>
+            <!-- Hero Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <button onclick="openAdmissionModal()" class="w-full sm:w-auto bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-emerald-950 text-base font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-gold-500/30 transition-all transform hover:-translate-y-1">
+                    <i class="fa-solid fa-file-signature mr-2"></i> Online Admission 2026
+                </button>
+                <a href="#results" class="w-full sm:w-auto bg-emerald-900/90 hover:bg-emerald-800 text-gold-300 hover:text-white border-2 border-gold-500/50 text-base font-bold px-8 py-4 rounded-xl backdrop-blur-sm transition-all transform hover:-translate-y-1 text-center">
+                    <i class="fa-solid fa-square-poll-vertical mr-2"></i> Check Student Result
+                </a>
+                <a href="#donations" class="w-full sm:w-auto bg-emerald-800/80 hover:bg-emerald-700 text-white text-base font-bold px-8 py-4 rounded-xl transition-all border border-emerald-600 text-center">
+                    <i class="fa-solid fa-hand-holding-heart mr-2"></i> Support Students
+                </a>
+            </div>
 
-    <div class="grid grid-3">
-      <div class="card">
-        <span class="pill">Curriculum</span>
-        <h3>Islamic Education</h3>
-        <p>A structured path beginning with Nazirah Qur'an and foundational Islamic studies,
-        building toward the classical sciences of Fiqh, Hadith, and Tafsir.</p>
-      </div>
-      <div class="card">
-        <span class="pill">Featured</span>
-        <h3>The Aalim Course</h3>
-        <p>Our complete Dars-e-Nizami / Aalim programme, covering the traditional Islamic sciences
-        under the guidance of qualified scholars.</p>
-      </div>
-      <div class="card">
-        <span class="pill">Service</span>
-        <h3>Dar-ul-Ifta</h3>
-        <p>A dedicated department where qualified muftis respond to religious questions from
-        students and the wider public.</p>
-      </div>
-      <div class="card">
-        <span class="pill">Community</span>
-        <h3>Student Life</h3>
-        <p>A residential environment structured around daily prayer, study, discipline
-        and character-building, currently home to 5 resident students.</p>
-      </div>
-      <div class="card">
-        <span class="pill">Resource</span>
-        <h3>Islamic Library</h3>
-        <p>A growing collection of Arabic and Urdu works spanning Fiqh, Hadith, Tafsir,
-        Arabic language and Islamic history.</p>
-      </div>
-      <div class="card">
-        <span class="pill">Excellence</span>
-        <h3>Qualified Faculty</h3>
-        <p>14 teachers and staff members guide students academically and morally
-        throughout their studies.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="alt">
-  <div class="container">
-    <div class="section-head center"><span class="eyebrow">Leadership</span><h2>A word from our leadership</h2></div>
-    <div class="grid grid-2" style="margin-bottom:28px;">
-      <div class="card" style="display:grid; grid-template-columns:140px 1fr; gap:20px; align-items:start;">
-        <div class="ph round">
-  <!-- Muhtamim Photo — paste your image path/URL inside src="" below -->
-  <img src="./muhtamim.jpg" alt="">
-  <span class="ph-label">Muhtamim Photo</span>
-  
-</div>
-        <div>
-          <span class="pill">Message from the Muhtamim</span>
-          <h3>[Muhtamim's Name — Replace]</h3>
-          <p>[Replace with the Muhtamim's official biography and welcome message. Do not
-          invent qualifications, years of service, or scholarly background.]</p>
+            <!-- Metric Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-5xl mx-auto">
+                <div class="bg-emerald-900/60 border border-gold-500/20 p-5 rounded-2xl backdrop-blur-sm">
+                    <div class="text-gold-400 text-3xl font-extrabold">1,500+</div>
+                    <div class="text-emerald-100 text-xs sm:text-sm mt-1 font-medium">Enrolled Students</div>
+                </div>
+                <div class="bg-emerald-900/60 border border-gold-500/20 p-5 rounded-2xl backdrop-blur-sm">
+                    <div class="text-gold-400 text-3xl font-extrabold">65+</div>
+                    <div class="text-emerald-100 text-xs sm:text-sm mt-1 font-medium">Senior Scholars & Muftis</div>
+                </div>
+                <div class="bg-emerald-900/60 border border-gold-500/20 p-5 rounded-2xl backdrop-blur-sm">
+                    <div class="text-gold-400 text-3xl font-extrabold">100%</div>
+                    <div class="text-emerald-100 text-xs sm:text-sm mt-1 font-medium">Free Tuition & Boarding</div>
+                </div>
+                <div class="bg-emerald-900/60 border border-gold-500/20 p-5 rounded-2xl backdrop-blur-sm">
+                    <div class="text-gold-400 text-3xl font-extrabold">28+</div>
+                    <div class="text-emerald-100 text-xs sm:text-sm mt-1 font-medium">Years of Excellence</div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card" style="display:grid; grid-template-columns:140px 1fr; gap:20px; align-items:start;">
-        <div class="ph round">
-  <!-- Nazim-e-Ala Photo — paste your image path/URL inside src="" below -->
-  <img src="./nazimala.jpg" alt="">
-  <span class="ph-label">Nazim-e-Ala Photo</span>
-  
-</div>
-        <div>
-          <span class="pill">Message from the Nazim-e-Ala</span>
-          <h3>[Nazim-e-Ala's Name — Replace]</h3>
-          <p>[Replace with the Nazim-e-Ala's official biography and message to students
-          and parents. Do not invent qualifications or history.]</p>
+    </section>
+
+    <!-- Daily Prayer Schedule -->
+    <section id="prayers" class="bg-emerald-950 text-white py-8 border-b border-gold-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <span class="text-gold-400 font-semibold text-xs uppercase tracking-widest"><i class="fa-solid fa-clock mr-1"></i> Today's Timings</span>
+                    <h2 class="text-2xl font-bold text-white">Daily Prayer & Jama'at Schedule</h2>
+                    <p class="text-xs text-emerald-300 mt-1">Calculated for Karachi & Surrounding Regions (Hanafi Method)</p>
+                </div>
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 w-full md:w-auto">
+                    <div class="bg-emerald-900/90 border border-gold-500/30 p-3 rounded-xl text-center">
+                        <span class="text-[10px] text-gold-400 uppercase font-bold block">Fajr</span>
+                        <span class="text-sm font-extrabold text-white">5:15 AM</span>
+                    </div>
+                    <div class="bg-emerald-900/90 border border-gold-500/30 p-3 rounded-xl text-center">
+                        <span class="text-[10px] text-gold-400 uppercase font-bold block">Dhuhr</span>
+                        <span class="text-sm font-extrabold text-white">12:30 PM</span>
+                    </div>
+                    <div class="bg-emerald-900/90 border border-gold-500/30 p-3 rounded-xl text-center">
+                        <span class="text-[10px] text-gold-400 uppercase font-bold block">Asr</span>
+                        <span class="text-sm font-extrabold text-white">4:45 PM</span>
+                    </div>
+                    <div class="bg-emerald-900/90 border border-gold-500/30 p-3 rounded-xl text-center">
+                        <span class="text-[10px] text-gold-400 uppercase font-bold block">Maghrib</span>
+                        <span class="text-sm font-extrabold text-white">6:35 PM</span>
+                    </div>
+                    <div class="bg-emerald-900/90 border border-gold-500/30 p-3 rounded-xl text-center">
+                        <span class="text-[10px] text-gold-400 uppercase font-bold block">Isha</span>
+                        <span class="text-sm font-extrabold text-white">8:00 PM</span>
+                    </div>
+                    <div class="bg-gold-500/20 border border-gold-400 p-3 rounded-xl text-center">
+                        <span class="text-[10px] text-gold-300 uppercase font-bold block">Jumu'ah</span>
+                        <span class="text-sm font-extrabold text-gold-400">1:30 PM</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Leadership & Administration Section (Muhtamim, Nazim, Scholars) -->
+    <section id="leadership" class="py-20 bg-white border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-gold-700 font-bold text-xs bg-gold-100 px-4 py-1.5 rounded-full border border-gold-300 uppercase tracking-wider">
+                    Institutional Leadership
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-emerald-950 mt-3">
+                    Patrons, Muhtamim & Principal Administration
+                </h2>
+                <div class="w-20 h-1 bg-gold-500 mx-auto my-3 rounded-full"></div>
+                <p class="text-slate-600 text-sm">
+                    Guided by world-class Islamic scholars who oversee the educational rigor, spiritual development, and academic integrity of Jamia Madinatul Ilm.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Patron / Muhtamim Sahib -->
+                <div class="bg-emerald-50/60 rounded-3xl p-6 border-2 border-gold-500/30 hover:border-gold-500 transition-all shadow-md hover:shadow-xl text-center group flex flex-col justify-between">
+                    <div>
+                        <div class="relative w-36 h-36 mx-auto rounded-full overflow-hidden border-4 border-gold-500 mb-5 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                            <img src="./muhtamim.jpg" 
+                                 alt="Muhtamim Sahib" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/400x400/043823/ffffff?text=Muhtamim+Sahib'">
+                        </div>
+                        <span class="bg-emerald-950 text-gold-400 font-bold text-[11px] px-3 py-1 rounded-full uppercase tracking-wider border border-gold-500/40">Patron-in-Chief</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3">Hazrat Allama Maolana Peer Seyed ShujaUlhaq Shah Sahib</h3>
+                        <p class="text-xs text-gold-700 font-semibold mb-3">Muhtamim Sahib (Rector / Founder)</p>
+                        <p class="text-xs text-slate-600 italic leading-relaxed bg-white p-3 rounded-2xl border border-emerald-100 shadow-inner mb-4">
+                            "Our mandate is to produce well-rounded Muslim scholars equipped with both classical depth and modern analytical tools to serve humanity."
+                        </p>
+                    </div>
+                    <div class="text-[11px] text-emerald-900 font-medium">
+                        <i class="fa-solid fa-graduation-cap text-gold-600 mr-1"></i> Senior Scholar of Hadith & Fiqh
+                    </div>
+                </div>
+
+                <!-- Nazim-e-Aala / Principal -->
+                <div class="bg-emerald-50/60 rounded-3xl p-6 border-2 border-gold-500/30 hover:border-gold-500 transition-all shadow-md hover:shadow-xl text-center group flex flex-col justify-between">
+                    <div>
+                        <div class="relative w-36 h-36 mx-auto rounded-full overflow-hidden border-4 border-gold-500 mb-5 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                            <img src="./nazimala.jpg" 
+                                 alt="Nazim-e-Aala" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/400x400/043823/ffffff?text=Nazim+e+Aala'">
+                        </div>
+                        <span class="bg-emerald-950 text-gold-400 font-bold text-[11px] px-3 py-1 rounded-full uppercase tracking-wider border border-gold-500/40">Director Administration</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3">Hazrat Maulana Mufti Muhammad Iftekhar Yemeni</h3>
+                        <p class="text-xs text-gold-700 font-semibold mb-3">Nazim-e-Aala (Principal / Director)</p>
+                        <p class="text-xs text-slate-600 italic leading-relaxed bg-white p-3 rounded-2xl border border-emerald-100 shadow-inner mb-4">
+                            "We maintain strict administrative quality, disciplined residence halls, and structured student welfare at all times."
+                        </p>
+                    </div>
+                    <div class="text-[11px] text-emerald-900 font-medium">
+                        <i class="fa-solid fa-building-user text-gold-600 mr-1"></i> Institutional Operations Lead
+                    </div>
+                </div>
+
+                <!-- Sheikh-ul-Hadith -->
+                <div class="bg-emerald-50/60 rounded-3xl p-6 border-2 border-gold-500/30 hover:border-gold-500 transition-all shadow-md hover:shadow-xl text-center group flex flex-col justify-between">
+                    <div>
+                        <div class="relative w-36 h-36 mx-auto rounded-full overflow-hidden border-4 border-gold-500 mb-5 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                            <img src="./hadith.png" 
+                                 alt="Sheikh-ul-Hadith" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/400x400/043823/ffffff?text=Sheikh+ul+Hadith'">
+                        </div>
+                        <span class="bg-emerald-950 text-gold-400 font-bold text-[11px] px-3 py-1 rounded-full uppercase tracking-wider border border-gold-500/40">Academic Head</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3">Mufti Sheikh Ibrahim Siddiqui</h3>
+                        <p class="text-xs text-gold-700 font-semibold mb-3">Sheikh-ul-Hadith (Head of Hadith)</p>
+                        <p class="text-xs text-slate-600 italic leading-relaxed bg-white p-3 rounded-2xl border border-emerald-100 shadow-inner mb-4">
+                            "Teaching the Sahih of Imam Bukhari and Muslim with unbroken chains of transmission back to the Holy Prophet ﷺ."
+                        </p>
+                    </div>
+                    <div class="text-[11px] text-emerald-900 font-medium">
+                        <i class="fa-solid fa-book-quran text-gold-600 mr-1"></i> Sahih Bukhari Chair
+                    </div>
+                </div>
+
+                <!-- Naib Nazim / Vice Principal -->
+                <div class="bg-emerald-50/60 rounded-3xl p-6 border-2 border-gold-500/30 hover:border-gold-500 transition-all shadow-md hover:shadow-xl text-center group flex flex-col justify-between">
+                    <div>
+                        <div class="relative w-36 h-36 mx-auto rounded-full overflow-hidden border-4 border-gold-500 mb-5 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                            <img src="./nasir sab.png" 
+                                 alt="Naib Nazim" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/400x400/043823/ffffff?text=Naib+Nazim'">
+                        </div>
+                        <span class="bg-emerald-950 text-gold-400 font-bold text-[11px] px-3 py-1 rounded-full uppercase tracking-wider border border-gold-500/40">Vice Principal</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3">Hazrat Allama Maolana Muhammad Naisir Bindayalavi Sab</h3>
+                        <p class="text-xs text-gold-700 font-semibold mb-3">Naib Nazim (Vice Principal)</p>
+                        <p class="text-xs text-slate-600 italic leading-relaxed bg-white p-3 rounded-2xl border border-emerald-100 shadow-inner mb-4">
+                            "Overseeing student admissions, examinations, hostel welfare, and character cultivation daily."
+                        </p>
+                    </div>
+                    <div class="text-[11px] text-emerald-900 font-medium">
+                        <i class="fa-solid fa-users text-gold-600 mr-1"></i> Student Affairs Administrator
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Photo Gallery Section -->
+    <section id="gallery" class="py-20 islamic-bg-light border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-emerald-900 font-bold text-xs bg-emerald-100 px-4 py-1.5 rounded-full border border-emerald-300 uppercase tracking-wider">
+                    Visual Journey
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-emerald-950 mt-3">
+                    Campus & Event Photo Gallery
+                </h2>
+                <div class="w-20 h-1 bg-gold-500 mx-auto my-3 rounded-full"></div>
+                <p class="text-slate-600 text-sm">
+                    Explore life at Jamia Madinatul Ilm—from our grand mosque and academic halls to annual convocation ceremonies.
+                </p>
+            </div>
+
+            <!-- Gallery Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="gallery-filter-buttons">
+                <button onclick="filterGallery('all')" class="gallery-tab active bg-emerald-900 text-gold-400 font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition-all">All Photos</button>
+                <button onclick="filterGallery('campus')" class="gallery-tab bg-white text-emerald-900 border border-slate-200 hover:bg-emerald-50 font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Campus & Mosque</button>
+                <button onclick="filterGallery('events')" class="gallery-tab bg-white text-emerald-900 border border-slate-200 hover:bg-emerald-50 font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Events & Conferences</button>
+                <button onclick="filterGallery('convocation')" class="gallery-tab bg-white text-emerald-900 border border-slate-200 hover:bg-emerald-50 font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Graduation / Dastaar-Bandi</button>
+                <button onclick="filterGallery('classrooms')" class="gallery-tab bg-white text-emerald-900 border border-slate-200 hover:bg-emerald-50 font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Classrooms & Library</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="gallery-grid">
+                
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item campus relative group rounded-2xl overflow-hidden border-2 border-gold-500/30 shadow-md bg-emerald-950 h-64 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1200&auto=format&fit=crop', 'Central Mosque & Courtyard', 'Jamia Campus Architecture')">
+                    <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=600&auto=format&fit=crop" alt="Central Mosque" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/20 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-5">
+                        <span class="text-gold-400 font-bold text-xs uppercase">Campus & Mosque</span>
+                        <h4 class="text-white font-bold text-base">Central Mosque & Courtyard</h4>
+                        <p class="text-emerald-200 text-xs">Accommodating 2,000+ worshippers daily</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item convocation relative group rounded-2xl overflow-hidden border-2 border-gold-500/30 shadow-md bg-emerald-950 h-64 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop', 'Annual Graduation & Dastaar-Bandi', 'Graduation Ceremony for Huffaz & Aalims')">
+                    <img src="./program.jpg" alt="Graduation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/20 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-5">
+                        <span class="text-gold-400 font-bold text-xs uppercase">Annual Convocation</span>
+                        <h4 class="text-white font-bold text-base">Graduation & Dastaar-Bandi</h4>
+                        <p class="text-emerald-200 text-xs">Honoring 150+ Huffaz and Graduating Scholars</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item classrooms relative group rounded-2xl overflow-hidden border-2 border-gold-500/30 shadow-md bg-emerald-950 h-64 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop', 'Central Classical Library', 'Over 25,000 Rare Manuscripts and Islamic Books')">
+                    <img src="./library_of_imges.png" alt="Library" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/20 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-5">
+                        <span class="text-gold-400 font-bold text-xs uppercase">Classrooms & Library</span>
+                        <h4 class="text-white font-bold text-base">Central Classical Library</h4>
+                        <p class="text-emerald-200 text-xs">Home to 25,000+ volumes and manuscripts</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item events relative group rounded-2xl overflow-hidden border-2 border-gold-500/30 shadow-md bg-emerald-950 h-64 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop', 'International Seerah Conference', 'Annual Gathering of World-Renowned Islamic Scholars')">
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=600&auto=format&fit=crop" alt="Conference" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/20 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-5">
+                        <span class="text-gold-400 font-bold text-xs uppercase">Events & Conferences</span>
+                        <h4 class="text-white font-bold text-base">Seerah International Conference</h4>
+                        <p class="text-emerald-200 text-xs">Keynote addresses by international scholars</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item classrooms relative group rounded-2xl overflow-hidden border-2 border-gold-500/30 shadow-md bg-emerald-950 h-64 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop', 'Interactive Hifz Classrooms', 'Focused Daily Quran Recitation & Revision Sessions')">
+                    <img src="./mufti madresa.png" alt="Hifz Class" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/20 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-5">
+                        <span class="text-gold-400 font-bold text-xs uppercase">Classrooms & Library</span>
+                        <h4 class="text-white font-bold text-base">Interactive Hifz Classrooms</h4>
+                        <p class="text-emerald-200 text-xs">Small batch sizes with personalized mentoring</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item campus relative group rounded-2xl overflow-hidden border-2 border-gold-500/30 shadow-md bg-emerald-950 h-64 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1200&auto=format&fit=crop', 'Residential Hostel Complex', 'Clean, Secure, and Comfortable Housing for Boarding Students')">
+                    <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=600&auto=format&fit=crop" alt="Hostel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/20 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-5">
+                        <span class="text-gold-400 font-bold text-xs uppercase">Campus & Facilities</span>
+                        <h4 class="text-white font-bold text-base">Residential Hostel Complex</h4>
+                        <p class="text-emerald-200 text-xs">Providing wholesome housing for 800+ boarders</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses & Departments Section -->
+    <section id="departments" class="py-20 bg-white border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-gold-700 font-bold text-xs bg-gold-100 px-4 py-1.5 rounded-full border border-gold-300 uppercase tracking-wider">
+                    Academic Programs
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-emerald-950 mt-3">
+                    Educational Faculties & Courses
+                </h2>
+                <div class="w-20 h-1 bg-gold-500 mx-auto my-3 rounded-full"></div>
+                <p class="text-slate-600 text-sm">
+                    Structured learning pathways spanning Quranic Memorization, Higher Islamic Jurisprudence, Women's Education, and Modern IT Skills.
+                </p>
+            </div>
+
+            <!-- Course Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12" id="course-filter-buttons">
+                <button onclick="filterCourses('all')" class="course-tab active bg-emerald-900 text-gold-400 font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition-all">All Faculties</button>
+                <button onclick="filterCourses('quran')" class="course-tab bg-emerald-50 text-emerald-900 hover:bg-emerald-100 font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Hifz & Tajweed</button>
+                <button onclick="filterCourses('dars')" class="course-tab bg-emerald-50 text-emerald-900 hover:bg-emerald-100 font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Dars-e-Nizami (Aalim Degree)</button>
+                <button onclick="filterCourses('ifta')" class="course-tab bg-emerald-50 text-emerald-900 hover:bg-emerald-100 font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Specialized Ifta</button>
+                <button onclick="filterCourses('women')" class="course-tab bg-emerald-50 text-emerald-900 hover:bg-emerald-100 font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Women's Campus</button>
+            </div>
+
+            <!-- Course Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Course 1 -->
+                <div class="course-card quran bg-emerald-50/50 rounded-2xl p-6 border border-emerald-100 hover:border-gold-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-900 text-gold-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-book-quran"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gold-700 bg-gold-100 px-3 py-1 rounded-full uppercase">Duration: 2 - 3 Years</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3 mb-2">Hifz-ul-Quran & Tajweed</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Complete memorization of the Glorious Quran with precise phonetic rules (Tajweed) and daily revision protocols.
+                        </p>
+                    </div>
+                    <button onclick="openAdmissionModal('Hifz-ul-Quran')" class="w-full bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                        Apply For Course <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="course-card dars bg-emerald-50/50 rounded-2xl p-6 border border-emerald-100 hover:border-gold-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-900 text-gold-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gold-700 bg-gold-100 px-3 py-1 rounded-full uppercase">Duration: 8 Years</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3 mb-2">Dars-e-Nizami (Shahadat-ul-Aalamiyyah)</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            In-depth study of Classical Arabic Grammar, Literature, Islamic Law (Fiqh), Usul, Hadith Commentaries, and Tafseer.
+                        </p>
+                    </div>
+                    <button onclick="openAdmissionModal('Dars-e-Nizami')" class="w-full bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                        Apply For Course <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="course-card ifta bg-emerald-50/50 rounded-2xl p-6 border border-emerald-100 hover:border-gold-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-900 text-gold-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gold-700 bg-gold-100 px-3 py-1 rounded-full uppercase">Duration: 2 Years Post-Grad</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3 mb-2">Takhassus Fil Fiqh (Specialized Ifta)</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Advanced specialization in Islamic Jurisprudence, research methodology, modern financial rulings, and edict writing.
+                        </p>
+                    </div>
+                    <button onclick="openAdmissionModal('Specialized Ifta')" class="w-full bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                        Apply For Course <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Course 4 -->
+                <div class="course-card women bg-emerald-50/50 rounded-2xl p-6 border border-emerald-100 hover:border-gold-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-900 text-gold-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-venus"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gold-700 bg-gold-100 px-3 py-1 rounded-full uppercase">Duration: 4 Years</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3 mb-2">Aalimah Program (Women's Campus)</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Comprehensive Islamic studies tailored for female students in a secure, segregated, and dedicated facility.
+                        </p>
+                    </div>
+                    <button onclick="openAdmissionModal('Aalimah Program')" class="w-full bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                        Apply For Course <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Course 5 -->
+                <div class="course-card quran bg-emerald-50/50 rounded-2xl p-6 border border-emerald-100 hover:border-gold-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-900 text-gold-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-microphone text-xl"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gold-700 bg-gold-100 px-3 py-1 rounded-full uppercase">Duration: 1 Year</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3 mb-2">Qirat As-Sab'ah (Recitation Certificate)</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Mastering the seven canonical recitations of the Holy Quran under certified Qaris with connected Sanad.
+                        </p>
+                    </div>
+                    <button onclick="openAdmissionModal('Qirat Certification')" class="w-full bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                        Apply For Course <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Course 6 -->
+                <div class="course-card dars bg-emerald-50/50 rounded-2xl p-6 border border-emerald-100 hover:border-gold-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-900 text-gold-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gold-700 bg-gold-100 px-3 py-1 rounded-full uppercase">Duration: 6 Months</span>
+                        <h3 class="text-xl font-bold text-emerald-950 mt-3 mb-2">Arabic Language & IT Skills</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Conversational Classical Arabic combined with computer literacy, web design, and digital publishing for scholars.
+                        </p>
+                    </div>
+                    <button onclick="openAdmissionModal('Arabic & IT Course')" class="w-full bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                        Apply For Course <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Result Checker Section -->
+    <section id="results" class="py-20 islamic-bg-light border-b border-gold-500/20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl p-8 border-2 border-gold-500/40 shadow-xl">
+                
+                <div class="text-center mb-8">
+                    <span class="text-xs font-bold bg-emerald-100 text-emerald-900 px-3.5 py-1 rounded-full uppercase">Examination Portal</span>
+                    <h2 class="text-3xl font-extrabold text-emerald-950 mt-2">Online Student Result Checker</h2>
+                    <p class="text-xs text-slate-500 mt-1">Enter examination details to search and generate an official printable digital transcript.</p>
+                </div>
+
+                <!-- Search Input Form -->
+                <form onsubmit="searchResult(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Academic Year</label>
+                            <select id="resultYear" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-700 outline-none text-xs bg-white">
+                                <option value="2025-2026">2025 - 2026</option>
+                                <option value="2024-2025">2024 - 2025</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Examination Term</label>
+                            <select id="resultTerm" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-700 outline-none text-xs bg-white">
+                                <option value="Annual Examination">Annual Examination</option>
+                                <option value="Mid-Term Examination">Mid-Term Examination</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Roll Number / Student ID *</label>
+                            <input type="text" id="resultRoll" required placeholder="Try 1001, 1002, or 1003" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-700 outline-none text-xs font-mono">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-[11px] text-slate-500"><i class="fa-solid fa-circle-info text-gold-600 mr-1"></i> Demo Roll Numbers: <strong>1001</strong> (Muhammad Ali), <strong>1002</strong> (Usman Ghani), <strong>1003</strong> (Fatima Zahra)</span>
+                        <button type="submit" class="bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold px-6 py-2.5 rounded-xl text-xs transition-all shadow-md">
+                            <i class="fa-solid fa-magnifying-glass mr-1.5"></i> Find Result
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Darul Ifta Section -->
+    <section id="fatwa" class="py-20 bg-white border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Recent Fatawa Accordion -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <span class="text-gold-700 font-bold text-xs bg-gold-100 px-3.5 py-1 rounded-full border border-gold-300 uppercase">Islamic Jurisprudence</span>
+                        <h2 class="text-3xl font-extrabold text-emerald-950 mt-2">Darul Ifta - Verified Rulings</h2>
+                        <p class="text-xs text-slate-500 mt-1">Browse recent religious decrees verified by senior Muftis of Jamia Madinatul Ilm.</p>
+                    </div>
+
+                    <div class="space-y-3" id="fatwa-accordion">
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                            <button onclick="toggleFatwa('fatwa1')" class="w-full p-4 text-left font-bold text-emerald-950 bg-emerald-50/50 hover:bg-emerald-100/50 flex justify-between items-center text-sm transition-colors">
+                                <span><i class="fa-solid fa-scale-balanced text-gold-600 mr-2"></i> Fatwa #402: Rulings on Digital Currencies & Online Trading</span>
+                                <i class="fa-solid fa-chevron-down text-xs text-emerald-800" id="icon-fatwa1"></i>
+                            </button>
+                            <div id="fatwa1" class="hidden p-4 text-xs text-slate-600 leading-relaxed bg-white border-t border-slate-100">
+                                <strong>Answer summary:</strong> Digital assets lacking sovereign backing or subject to extreme speculative risk (Gharar) fall under severe scrutiny. Trading is permissible only when backed by tangible assets and devoid of interest (Riba).
+                            </div>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                            <button onclick="toggleFatwa('fatwa2')" class="w-full p-4 text-left font-bold text-emerald-950 bg-emerald-50/50 hover:bg-emerald-100/50 flex justify-between items-center text-sm transition-colors">
+                                <span><i class="fa-solid fa-scale-balanced text-gold-600 mr-2"></i> Fatwa #389: Timings of Suhoor & Iftar During Travel</span>
+                                <i class="fa-solid fa-chevron-down text-xs text-emerald-800" id="icon-fatwa2"></i>
+                            </button>
+                            <div id="fatwa2" class="hidden p-4 text-xs text-slate-600 leading-relaxed bg-white border-t border-slate-100">
+                                <strong>Answer summary:</strong> A traveler follows the local sunset and dawn timings of the precise geographical location they are currently passing through, regardless of home city schedules.
+                            </div>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                            <button onclick="toggleFatwa('fatwa3')" class="w-full p-4 text-left font-bold text-emerald-950 bg-emerald-50/50 hover:bg-emerald-100/50 flex justify-between items-center text-sm transition-colors">
+                                <span><i class="fa-solid fa-scale-balanced text-gold-600 mr-2"></i> Fatwa #351: Calculation of Zakat on Commercial Inventory</span>
+                                <i class="fa-solid fa-chevron-down text-xs text-emerald-800" id="icon-fatwa3"></i>
+                            </button>
+                            <div id="fatwa3" class="hidden p-4 text-xs text-slate-600 leading-relaxed bg-white border-t border-slate-100">
+                                <strong>Answer summary:</strong> Zakat is calculated at 2.5% on the wholesale market value of goods intended for resale on the student's personal Zakat anniversary date, minus immediate short-term liabilities.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ask a Fatwa Form -->
+                <div class="lg:col-span-5 bg-emerald-900 text-white rounded-3xl p-6 shadow-xl border-2 border-gold-500/40">
+                    <div class="mb-4">
+                        <span class="text-gold-400 font-bold text-xs uppercase"><i class="fa-solid fa-circle-question mr-1"></i> Confidential Query</span>
+                        <h3 class="text-2xl font-bold text-white mt-1">Ask A Question (Shariah Query)</h3>
+                        <p class="text-xs text-emerald-200 mt-1">Submit your religious query directly to our Board of Muftis.</p>
+                    </div>
+
+                    <form onsubmit="handleFatwaSubmit(event)" class="space-y-3 text-slate-800">
+                        <div>
+                            <input type="text" required placeholder="Your Full Name" class="w-full px-3.5 py-2 rounded-lg text-xs border border-emerald-700 outline-none focus:ring-2 focus:ring-gold-400">
+                        </div>
+                        <div>
+                            <input type="email" required placeholder="Email Address (For Private Reply)" class="w-full px-3.5 py-2 rounded-lg text-xs border border-emerald-700 outline-none focus:ring-2 focus:ring-gold-400">
+                        </div>
+                        <div>
+                            <select class="w-full px-3.5 py-2 rounded-lg text-xs border border-emerald-700 outline-none focus:ring-2 focus:ring-gold-400 bg-white">
+                                <option>Category: Worship & Prayer (Ibadat)</option>
+                                <option>Category: Business & Transactions (Muamalat)</option>
+                                <option>Category: Family & Marriage (Munakahat)</option>
+                                <option>Category: General Beliefs (Aqaid)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <textarea rows="3" required placeholder="Type your question clearly with all necessary context..." class="w-full px-3.5 py-2 rounded-lg text-xs border border-emerald-700 outline-none focus:ring-2 focus:ring-gold-400 resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gold-500 hover:bg-gold-600 text-emerald-950 font-bold py-2.5 rounded-xl text-xs transition-all shadow-md uppercase">
+                            Submit Query Privately
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Portal -->
+    <section id="donations" class="py-20 bg-gradient-to-b from-emerald-900 to-emerald-950 text-white border-b-2 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-gold-400 bg-emerald-800/80 px-4 py-1.5 rounded-full text-xs font-bold border border-gold-500/30 uppercase">
+                    Sadqah Jariyah & Zakat
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gold-400 mt-3">
+                    Support Islamic Education
+                </h2>
+                <p class="text-emerald-100 text-sm mt-2">
+                    Your generous support funds tuition, daily meals, accommodation, and books for orphan and deserving Islamic students.
+                </p>
+            </div>
+
+            <!-- Donation Amount Selector -->
+            <div class="bg-emerald-900/90 border border-gold-500/30 rounded-3xl p-6 max-w-3xl mx-auto mb-12 shadow-2xl backdrop-blur-sm">
+                <h3 class="text-center text-sm font-bold text-emerald-200 mb-4">Select Contribution Amount (PKR / USD)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                    <button onclick="selectDonationAmount(this, 'Rs. 2,500 ($10)')" class="donation-btn bg-emerald-950 hover:bg-gold-500 hover:text-emerald-950 text-gold-400 border border-gold-500/40 font-bold py-3 rounded-xl text-xs transition-all">Rs. 2,500 ($10)</button>
+                    <button onclick="selectDonationAmount(this, 'Rs. 5,000 ($20)')" class="donation-btn bg-emerald-950 hover:bg-gold-500 hover:text-emerald-950 text-gold-400 border border-gold-500/40 font-bold py-3 rounded-xl text-xs transition-all">Rs. 5,000 ($20)</button>
+                    <button onclick="selectDonationAmount(this, 'Rs. 15,000 ($50)')" class="donation-btn bg-emerald-950 hover:bg-gold-500 hover:text-emerald-950 text-gold-400 border border-gold-500/40 font-bold py-3 rounded-xl text-xs transition-all">Rs. 15,000 ($50)</button>
+                    <button onclick="selectDonationAmount(this, 'Rs. 50,000 ($180)')" class="donation-btn bg-emerald-950 hover:bg-gold-500 hover:text-emerald-950 text-gold-400 border border-gold-500/40 font-bold py-3 rounded-xl text-xs transition-all">Rs. 50,000 ($180)</button>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="selectedDonationText" readonly value="Selected: Rs. 5,000 ($20)" class="w-full bg-emerald-950 border border-emerald-700 text-gold-300 px-4 py-3 rounded-xl text-xs font-bold">
+                    <button onclick="triggerMockPayment()" class="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-emerald-950 font-extrabold px-8 py-3 rounded-xl text-xs shrink-0 shadow-lg uppercase">
+                        Proceed to Donate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bank Accounts -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-emerald-900/60 border border-gold-500/30 p-5 rounded-2xl text-center">
+                    <i class="fa-solid fa-building-columns text-2xl text-gold-400 mb-2"></i>
+                    <h4 class="font-bold text-white text-base">Meezan Bank Ltd</h4>
+                    <p class="text-[11px] text-emerald-200">Account Title: Jamia Madinatul Ilm</p>
+                    <div class="bg-emerald-950 p-2 rounded-lg border border-emerald-800 font-mono text-xs text-gold-300 flex justify-between items-center mt-3">
+                        <span>PK36 MEZN 0001 0203 0405</span>
+                        <button onclick="copyText('PK36 MEZN 0001 0203 0405')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-900/60 border border-gold-500/30 p-5 rounded-2xl text-center">
+                    <i class="fa-solid fa-mobile-screen text-2xl text-gold-400 mb-2"></i>
+                    <h4 class="font-bold text-white text-base">EasyPaisa Account</h4>
+                    <p class="text-[11px] text-emerald-200">Title: Jamia Educational Trust</p>
+                    <div class="bg-emerald-950 p-2 rounded-lg border border-emerald-800 font-mono text-xs text-gold-300 flex justify-between items-center mt-3">
+                        <span>0300-1234567</span>
+                        <button onclick="copyText('03001234567')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-900/60 border border-gold-500/30 p-5 rounded-2xl text-center">
+                    <i class="fa-solid fa-wallet text-2xl text-gold-400 mb-2"></i>
+                    <h4 class="font-bold text-white text-base">JazzCash Account</h4>
+                    <p class="text-[11px] text-emerald-200">Title: Jamia Educational Trust</p>
+                    <div class="bg-emerald-950 p-2 rounded-lg border border-emerald-800 font-mono text-xs text-gold-300 flex justify-between items-center mt-3">
+                        <span>0301-7654321</span>
+                        <button onclick="copyText('03017654321')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resource Downloads Hub -->
+    <section id="downloads" class="py-20 islamic-bg-light border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-emerald-800 font-bold text-xs bg-emerald-100 px-3.5 py-1 rounded-full uppercase">Document Hub</span>
+                <h2 class="text-3xl font-extrabold text-emerald-950 mt-2">Downloads & Syllabi</h2>
+                <p class="text-xs text-slate-500 mt-1">Access syllabus outlines, exam timetables, prospectus, and application forms in PDF.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-gold-500 transition-all shadow-sm flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-700 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Annual Prospectus</h4>
+                            <span class="text-[10px] text-slate-400">PDF • 3.4 MB</span>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Downloading Academic Prospectus PDF...')" class="text-emerald-800 hover:text-gold-600"><i class="fa-solid fa-download"></i></button>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-gold-500 transition-all shadow-sm flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-700 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Dars-e-Nizami Syllabus</h4>
+                            <span class="text-[10px] text-slate-400">PDF • 1.8 MB</span>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Downloading Syllabus PDF...')" class="text-emerald-800 hover:text-gold-600"><i class="fa-solid fa-download"></i></button>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-gold-500 transition-all shadow-sm flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-700 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Offline Admission Form</h4>
+                            <span class="text-[10px] text-slate-400">PDF • 850 KB</span>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Downloading Admission Form PDF...')" class="text-emerald-800 hover:text-gold-600"><i class="fa-solid fa-download"></i></button>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-gold-500 transition-all shadow-sm flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-700 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Annual Hijri Calendar</h4>
+                            <span class="text-[10px] text-slate-400">PDF • 2.1 MB</span>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Downloading Hijri Calendar PDF...')" class="text-emerald-800 hover:text-gold-600"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full uppercase">Get In Touch</span>
+                        <h2 class="text-3xl font-extrabold text-emerald-950 mt-2">Contact Jamia Administration</h2>
+                        <p class="text-xs text-slate-500 mt-1">We welcome visits from parents, scholars, and well-wishers.</p>
+                    </div>
+
+                    <div class="space-y-4 text-xs">
+                        <div class="flex items-center gap-3 bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                            <i class="fa-solid fa-location-dot text-emerald-800 text-xl"></i>
+                            <div>
+                                <strong class="text-slate-900 block">Campus Address:</strong>
+                                <span class="text-slate-600">Block 4, Gulshan Education Complex, Karachi, Pakistan</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                            <i class="fa-solid fa-phone text-emerald-800 text-xl"></i>
+                            <div>
+                                <strong class="text-slate-900 block">Phone Support:</strong>
+                                <span class="text-slate-600">+92 (21) 3456-7890 / +92 300 1234567</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                            <i class="fa-solid fa-envelope text-emerald-800 text-xl"></i>
+                            <div>
+                                <strong class="text-slate-900 block">Email Address:</strong>
+                                <span class="text-slate-600">info@madinatulum.edu.pk</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/923001234567" target="_blank" class="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl text-xs transition-all w-full shadow-md">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Direct WhatsApp Support
+                    </a>
+                </div>
+
+                <div class="lg:col-span-7 bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xl font-bold text-emerald-950 mb-4">Send An Official Message</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4 text-xs">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Your Full Name *</label>
+                                <input type="text" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Phone Number *</label>
+                                <input type="tel" required placeholder="+92 300 0000000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Subject</label>
+                            <input type="text" placeholder="Admission Inquiry / Donation Query" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Message Detail *</label>
+                            <textarea rows="4" required placeholder="Type your message here..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700 resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold px-8 py-3 rounded-xl text-xs transition-all shadow-md">
+                            Send Message Now
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-white border-t-4 border-gold-500 pt-16 pb-8 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-emerald-900 border border-gold-500 flex items-center justify-center text-gold-400">
+                            <i class="fa-solid fa-mosque"></i>
+                        </div>
+                        <h4 class="font-bold text-base text-gold-400">Jamia Madinatul Ilm</h4>
+                    </div>
+                    <p class="text-emerald-200 leading-relaxed">
+                        A center of academic excellence dedicated to traditional Islamic learning, spiritual cultivation, and modern intellect.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-gold-400 text-sm mb-3 border-b border-emerald-800 pb-1">Quick Links</h5>
+                    <ul class="space-y-2 text-emerald-200">
+                        <li><a href="#about" class="hover:text-gold-400">About Our History</a></li>
+                        <li><a href="#leadership" class="hover:text-gold-400">Leadership & Muhtamim</a></li>
+                        <li><a href="#departments" class="hover:text-gold-400">Academic Faculties</a></li>
+                        <li><a href="#gallery" class="hover:text-gold-400">Photo Gallery</a></li>
+                        <li><a href="#results" class="hover:text-gold-400">Check Examination Results</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-gold-400 text-sm mb-3 border-b border-emerald-800 pb-1">Programs</h5>
+                    <ul class="space-y-2 text-emerald-200">
+                        <li>Hifz-ul-Quran & Tajweed</li>
+                        <li>Dars-e-Nizami Degree</li>
+                        <li>Specialized Ifta Degree</li>
+                        <li>Aalimah Female Campus</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-gold-400 text-sm mb-3 border-b border-emerald-800 pb-1">Stay Connected</h5>
+                    <p class="text-emerald-200 mb-3">Follow our official social media channels for daily reminders and news:</p>
+                    <div class="flex gap-3 text-base">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-emerald-900 border border-emerald-700 flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-emerald-950 transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-emerald-900 border border-emerald-700 flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-emerald-950 transition-all"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-emerald-900 border border-emerald-700 flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-emerald-950 transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-emerald-900 pt-6 text-center text-emerald-400 flex flex-col sm:flex-row justify-between items-center gap-2">
+                <p>© 2026 Jamia Madinatul Ilm. All Rights Reserved.</p>
+                <p class="text-emerald-300">Modern Islamic Educational Portal</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Gallery Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 bg-black/90 z-50 hidden backdrop-blur-md flex items-center justify-center p-4">
+        <div class="max-w-4xl w-full bg-emerald-950 border-2 border-gold-500 rounded-3xl overflow-hidden shadow-2xl relative">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 text-gold-400 hover:text-white flex items-center justify-center text-xl transition-all">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="relative max-h-[70vh] bg-black flex items-center justify-center">
+                <img id="lightboxImage" src="" alt="Full view" class="max-h-[70vh] w-auto object-contain">
+            </div>
+            <div class="p-6 bg-emerald-950 text-white border-t border-gold-500/30">
+                <h3 id="lightboxTitle" class="text-xl font-bold text-gold-400"></h3>
+                <p id="lightboxDesc" class="text-xs text-emerald-200 mt-1"></p>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
 
-<section>
-  <div class="container">
-    <div class="section-head center"><span class="eyebrow">Glimpses</span><h2>Gallery preview</h2></div>
-    <div class="grid grid-4">
-      <div class="ph square">
-  <!-- Campus — paste your image path/URL inside src="" below -->
-  <img src="./computerlab1.jpg" alt="">
-  <span class="ph-label">Campus</span>
-  
-</div>
-      <div class="ph square">
-  <!-- Classroom — paste your image path/URL inside src="" below -->
-  <img src="./computerlab.jpg" alt="">
-  <span class="ph-label">Classroom</span>
-  
-</div>
-      <div class="ph square">
-  <!-- Library — paste your image path/URL inside src="" below -->
-  <img src="./dorudtimeinmasjid.jpg" alt="">
-  <span class="ph-label">Library</span>
-  
-</div>
-      <div class="ph square">
-  <!-- Graduation — paste your image path/URL inside src="" below -->
-  <img src="program.jpg" alt="">
-  <span class="ph-label">Graduation</span>
-  
-</div>
+    <!-- Online Admission Modal -->
+    <div id="admissionModal" class="fixed inset-0 bg-black/75 z-50 hidden backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-xl w-full border-2 border-gold-500 shadow-2xl relative overflow-hidden my-8">
+            <div class="bg-emerald-950 text-white p-6 border-b border-gold-500/40 relative">
+                <button onclick="closeAdmissionModal()" class="absolute top-4 right-4 text-emerald-300 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-graduation-cap text-gold-400 text-2xl"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-gold-400">Online Admission Application</h3>
+                        <p class="text-xs text-emerald-200">Academic Session 2026-2027</p>
+                    </div>
+                </div>
+            </div>
+
+            <form onsubmit="handleAdmissionSubmit(event)" class="p-6 space-y-4 max-h-[75vh] overflow-y-auto text-xs">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Select Desired Program *</label>
+                    <select id="modalCourseSelect" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700 bg-white">
+                        <option value="">-- Choose Course --</option>
+                        <option value="Hifz-ul-Quran">Hifz-ul-Quran & Tajweed</option>
+                        <option value="Dars-e-Nizami">Dars-e-Nizami (Aalim Course)</option>
+                        <option value="Specialized Ifta">Specialized Ifta (Post-Graduation)</option>
+                        <option value="Aalimah Program">Aalimah Program (Female Campus)</option>
+                        <option value="Qirat Certification">Qirat As-Sab'ah Certificate</option>
+                        <option value="Arabic & IT Course">Arabic Language & IT Course</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Student Full Name *</label>
+                        <input type="text" required placeholder="Full Name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Father / Guardian Name *</label>
+                        <input type="text" required placeholder="Father's Name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Contact Phone / WhatsApp *</label>
+                        <input type="tel" required placeholder="+92 300 0000000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Date of Birth *</label>
+                        <input type="date" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Residential Address *</label>
+                    <textarea rows="2" required placeholder="Full street address..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700 resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-emerald-950 font-bold py-3 rounded-xl shadow-lg transition-all uppercase">
+                    Submit Admission Application
+                </button>
+            </form>
+        </div>
     </div>
-    <div style="text-align:center; margin-top:26px;">
-      <a href="gallery.html" class="btn btn-outline">View Full Gallery</a>
+
+    <!-- Marksheet Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-black/75 z-50 hidden backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full border-2 border-gold-500 shadow-2xl relative overflow-hidden my-8" id="printable-marksheet">
+            <div class="bg-emerald-950 text-white p-6 border-b-2 border-gold-500 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gold-500 text-emerald-950 flex items-center justify-center font-bold text-xl">
+                        <i class="fa-solid fa-mosque"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gold-400">Official Academic Marksheet</h3>
+                        <p class="text-xs text-emerald-200">Jamia Madinatul Ilm Examination Board</p>
+                    </div>
+                </div>
+                <button onclick="closeResultModal()" class="text-emerald-300 hover:text-white text-xl print:hidden">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-6 text-xs" id="resultModalBody">
+                <!-- Injected dynamically via JS -->
+            </div>
+
+            <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end gap-3 print:hidden">
+                <button onclick="window.print()" class="bg-emerald-900 text-gold-300 px-5 py-2 rounded-xl font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Print Transcript
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
 
-<section class="alt" style="text-align:center;">
-  <div class="container">
-    <span class="eyebrow">Admissions Open</span>
-    <h2>Begin your journey of Islamic learning</h2>
-    <p style="max-width:52ch; margin:0 auto 26px; color:var(--muted);">
-      From Nazirah Qur'an to the complete Aalim Course — apply for admission
-      or reach out to our admissions office with any questions.
-    </p>
-    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-      <a href="admissions.html" class="btn btn-primary">Apply for Admission</a>
-      <a href="contact.html" class="btn btn-outline">Contact Admissions Office</a>
+    <!-- Portal Login Modal -->
+    <div id="portalModal" class="fixed inset-0 bg-black/75 z-50 hidden backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full border-2 border-gold-500 shadow-2xl relative overflow-hidden">
+            <div class="bg-emerald-950 text-white p-6 border-b border-gold-500/40 relative">
+                <button onclick="closePortalModal()" class="absolute top-4 right-4 text-emerald-300 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-user-shield text-gold-400 text-2xl"></i>
+                    <div>
+                        <h3 class="text-lg font-bold text-gold-400">Portal Login</h3>
+                        <p class="text-xs text-emerald-200">Students, Guardians & Teachers</p>
+                    </div>
+                </div>
+            </div>
+
+            <form onsubmit="handlePortalLogin(event)" class="p-6 space-y-4 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Registration ID / Email</label>
+                    <input type="text" required placeholder="e.g. STU-2026-001" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Password</label>
+                    <input type="password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-emerald-700">
+                </div>
+                <button type="submit" class="w-full bg-emerald-900 hover:bg-emerald-800 text-gold-300 font-bold py-3 rounded-xl shadow-md transition-all uppercase">
+                    Login to Portal
+                </button>
+            </form>
+        </div>
     </div>
-  </div>
-</section>
 
-
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h4>[Institute Name]</h4>
-        <p style="color:#B9B49F; font-size:.87rem; max-width:32ch;">
-          Islamic education from Nazirah Qur'an through the complete Aalim Course —
-          with a residential learning environment, Dar-ul-Ifta, and an Islamic library.
-        </p>
-      </div>
-      <div>
-        <h4>Explore</h4>
-        <a href="about.html">About the Institute</a>
-        <a href="programs.html">Educational Programs</a>
-        <a href="teachers.html">Teachers &amp; Staff</a>
-        <a href="library.html">Islamic Library</a>
-        <a href="gallery.html">Gallery</a>
-      </div>
-      <div>
-        <h4>Services</h4>
-        <a href="darul-ifta.html">Dar-ul-Ifta</a>
-        <a href="admissions.html">Admissions</a>
-        <a href="achievements.html">Achievements</a>
-        <a href="portal-login.html">Student / Teacher Portal</a>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <a href="#">[Replace with address]</a>
-        <a href="#">[Replace with phone]</a>
-        <a href="#">[Replace with email]</a>
-        <a href="contact.html">Full contact details →</a>
-      </div>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 left-5 z-50 bg-emerald-950 text-gold-300 border-2 border-gold-500 px-6 py-3.5 rounded-xl shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-xl text-gold-400"></i>
+        <span id="toastMessage" class="text-xs font-bold">Action completed successfully!</span>
     </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> [Institute Name]. All rights reserved.</span>
-      <span>Sample content — replace placeholders with official institute information.</span>
-    </div>
-  </div>
-</footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  // Mobile nav toggle
-  var toggle = document.querySelector('.menu-toggle');
-  var links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', function () {
-      links.classList.toggle('open');
-      toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
-    });
-    links.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        links.classList.remove('open');
-        toggle.textContent = '☰';
-      });
-    });
-  }
+    <!-- JavaScript Logic -->
+    <script>
+        // Demo Student Database
+        const studentDatabase = {
+            "1001": {
+                name: "Muhammad Ali",
+                father: "Tariq Mahmood",
+                course: "Dars-e-Nizami (Year 3)",
+                roll: "1001",
+                attendance: "96%",
+                status: "Passed (1st Division)",
+                marks: [
+                    { subject: "Tafseer-ul-Quran (Jalalayn)", max: 100, obtained: 92 },
+                    { subject: "Hadith Studies (Mishkat)", max: 100, obtained: 88 },
+                    { subject: "Fiqh & Usul-ul-Fiqh (Hidayah)", max: 100, obtained: 90 },
+                    { subject: "Arabic Grammar & Rhetoric", max: 100, obtained: 95 },
+                    { subject: "Logic & Philosophy", max: 100, obtained: 84 }
+                ]
+            },
+            "1002": {
+                name: "Usman Ghani",
+                father: "Abdul Rehman",
+                course: "Hifz-ul-Quran",
+                roll: "1002",
+                attendance: "98%",
+                status: "Passed (Distinction)",
+                marks: [
+                    { subject: "Memorization (Sabqi & Manzil)", max: 100, obtained: 98 },
+                    { subject: "Tajweed Rules & Makharij", max: 100, obtained: 96 },
+                    { subject: "Voice & Recitation Lahn", max: 100, obtained: 94 },
+                    { subject: "Basic Islamic Etiquettes", max: 100, obtained: 99 }
+                ]
+            },
+            "1003": {
+                name: "Fatima Zahra",
+                father: "Shahid Hussain",
+                course: "Aalimah Course (Year 2)",
+                roll: "1003",
+                attendance: "94%",
+                status: "Passed (1st Division)",
+                marks: [
+                    { subject: "Translation & Tafseer", max: 100, obtained: 89 },
+                    { subject: "Seerah & Islamic History", max: 100, obtained: 91 },
+                    { subject: "Arabic Syntax & Morphology", max: 100, obtained: 87 },
+                    { subject: "Fiqh-un-Nisa (Women's Fiqh)", max: 100, obtained: 95 }
+                ]
+            }
+        };
 
-  // Language switch (visual demo only — flips direction + swaps sample labels).
-  // Real translations should be wired up once official Urdu/Arabic copy is provided.
-  var langButtons = document.querySelectorAll('.lang-switch button');
-  langButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      langButtons.forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      var lang = btn.getAttribute('data-lang');
-      if (lang === 'ur' || lang === 'ar') {
-        document.documentElement.setAttribute('dir', 'rtl');
-        document.documentElement.setAttribute('lang', lang);
-      } else {
-        document.documentElement.setAttribute('dir', 'ltr');
-        document.documentElement.setAttribute('lang', 'en');
-      }
-    });
-  });
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
 
-  // Simple tab switcher (used on Library / Programs pages)
-  document.querySelectorAll('[data-tabs]').forEach(function (group) {
-    var buttons = group.querySelectorAll('.tabs button');
-    var panels = group.querySelectorAll('[data-panel]');
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        buttons.forEach(function (b) { b.classList.remove('active'); });
-        panels.forEach(function (p) { p.style.display = 'none'; });
-        btn.classList.add('active');
-        var target = group.querySelector('[data-panel="' + btn.getAttribute('data-tab') + '"]');
-        if (target) target.style.display = '';
-      });
-    });
-  });
+        // Gallery Filter Logic
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('#gallery-filter-buttons button');
 
-  // Admission / Ifta / Contact form demo submission (no backend wired yet)
-  document.querySelectorAll('form[data-demo-form]').forEach(function (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var note = form.querySelector('.form-success');
-      if (note) {
-        note.style.display = 'block';
-        form.reset();
-      }
-    });
-  });
-});
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-emerald-900', 'text-gold-400', 'shadow-md');
+                btn.classList.add('bg-white', 'text-emerald-900', 'border', 'border-slate-200');
+            });
 
-</script>
+            event.target.classList.remove('bg-white', 'text-emerald-900', 'border', 'border-slate-200');
+            event.target.classList.add('bg-emerald-900', 'text-gold-400', 'shadow-md');
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Lightbox Functions
+        function openLightbox(imgUrl, title, desc) {
+            document.getElementById('lightboxImage').src = imgUrl;
+            document.getElementById('lightboxTitle').innerText = title;
+            document.getElementById('lightboxDesc').innerText = desc;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        // Course Filter Logic
+        function filterCourses(category) {
+            const cards = document.querySelectorAll('.course-card');
+            const buttons = document.querySelectorAll('#course-filter-buttons button');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-emerald-900', 'text-gold-400', 'shadow-md');
+                btn.classList.add('bg-emerald-50', 'text-emerald-900');
+            });
+
+            event.target.classList.remove('bg-emerald-50', 'text-emerald-900');
+            event.target.classList.add('bg-emerald-900', 'text-gold-400', 'shadow-md');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleFatwa(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            }
+        }
+
+        function searchResult(e) {
+            e.preventDefault();
+            const roll = document.getElementById('resultRoll').value.trim();
+            const student = studentDatabase[roll];
+
+            if (!student) {
+                showToast('Roll Number not found! Try using demo numbers: 1001, 1002, or 1003');
+                return;
+            }
+
+            let totalObtained = 0;
+            let totalMax = 0;
+
+            let rows = student.marks.map(m => {
+                totalObtained += m.obtained;
+                totalMax += m.max;
+                return `
+                    <tr class="border-b border-slate-100">
+                        <td class="py-2.5 px-3 text-slate-800 font-semibold">${m.subject}</td>
+                        <td class="py-2.5 px-3 text-center text-slate-500">${m.max}</td>
+                        <td class="py-2.5 px-3 text-center font-bold text-emerald-900">${m.obtained}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            const percentage = ((totalObtained / totalMax) * 100).toFixed(1);
+
+            document.getElementById('resultModalBody').innerHTML = `
+                <div class="grid grid-cols-2 gap-4 bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                    <div><strong>Student Name:</strong> ${student.name}</div>
+                    <div><strong>Father Name:</strong> ${student.father}</div>
+                    <div><strong>Course/Program:</strong> ${student.course}</div>
+                    <div><strong>Roll Number:</strong> ${student.roll}</div>
+                    <div><strong>Attendance:</strong> ${student.attendance}</div>
+                    <div><strong>Academic Status:</strong> <span class="text-emerald-800 font-bold">${student.status}</span></div>
+                </div>
+
+                <table class="w-full text-left border-collapse border border-slate-200 rounded-xl overflow-hidden">
+                    <thead>
+                        <tr class="bg-emerald-950 text-white font-bold">
+                            <th class="py-2.5 px-3">Subject / Paper</th>
+                            <th class="py-2.5 px-3 text-center">Max Marks</th>
+                            <th class="py-2.5 px-3 text-center">Obtained</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                    <tfoot>
+                        <tr class="bg-gold-100 font-bold text-emerald-950">
+                            <td class="py-2.5 px-3">Total Score</td>
+                            <td class="py-2.5 px-3 text-center">${totalMax}</td>
+                            <td class="py-2.5 px-3 text-center text-emerald-900">${totalObtained} (${percentage}%)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            `;
+
+            document.getElementById('resultModal').classList.remove('hidden');
+        }
+
+        function closeResultModal() {
+            document.getElementById('resultModal').classList.add('hidden');
+        }
+
+        function openAdmissionModal(course = '') {
+            if (course) {
+                document.getElementById('modalCourseSelect').value = course;
+            }
+            document.getElementById('admissionModal').classList.remove('hidden');
+        }
+
+        function closeAdmissionModal() {
+            document.getElementById('admissionModal').classList.add('hidden');
+        }
+
+        function handleAdmissionSubmit(e) {
+            e.preventDefault();
+            closeAdmissionModal();
+            showToast('Admission form submitted successfully! Ref ID: ADM-2026-981');
+            e.target.reset();
+        }
+
+        function handleFatwaSubmit(e) {
+            e.preventDefault();
+            showToast('Fatwa query submitted confidentially. Tracking code sent to email.');
+            e.target.reset();
+        }
+
+        function openPortalModal() {
+            document.getElementById('portalModal').classList.remove('hidden');
+        }
+
+        function closePortalModal() {
+            document.getElementById('portalModal').classList.add('hidden');
+        }
+
+        function handlePortalLogin(e) {
+            e.preventDefault();
+            closePortalModal();
+            showToast('Portal Login simulated successfully!');
+            e.target.reset();
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('Message sent to administration successfully!');
+            e.target.reset();
+        }
+
+        function selectDonationAmount(btn, text) {
+            document.getElementById('selectedDonationText').value = "Selected: " + text;
+            showToast('Donation amount updated to ' + text);
+        }
+
+        function triggerMockPayment() {
+            showToast('Redirecting to Secure Payment Gateway...');
+        }
+
+        function copyText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast('Account details copied to clipboard!');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.innerText = message;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4000);
+        }
+    </script>
 </body>
 </html>
